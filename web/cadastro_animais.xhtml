@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cadastro de animal</title>
+        <style>
+            body {background-color:lightgrey;}
+            #tabela {
+                position: relative;
+                top:  30px;
+                left: 0px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+
+        <h:form>
+            <p:megaMenu orientation="#{megaMenuView.orientation}" style="margin-top:20px">
+                <p:submenu label="Cadastro" icon="ui-icon-check">
+                    <p:column>
+                        <p:submenu label="Cadastro">
+                            <p:menuitem value="Cadastro de pessoas" url="#" />
+                            <p:menuitem value="Cadastro de animais" url="#" />
+                        </p:submenu>
+                    </p:column>
+                </p:submenu>
+
+                <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
+            </p:megaMenu>
+            <div id="pessoa">
+                <p:outputLabel value="Cadastro de animal:" />
+                <table width="300">
+                    <tr>
+                        <td>
+                            <p:outputLabel value="Nome/Apelido:" />
+                        </td>
+                        <td>
+                            <p:inputText size="40" value="#{animalView.nome}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="Sexo:" />
+                        </td>
+                        <td>
+                            <p:selectOneRadio id="sexo" value="#{animalView.sexo}">
+                                <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                                <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+                            </p:selectOneRadio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="Raça:" />
+                        </td>
+                        <td>
+                            <p:inputText id="raça" value="#{animalView.raca}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="Peso:" />
+                        </td>
+                        <td>
+                            <p:inputText id="peso" value="#{animalView.peso}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="Espécie:" />
+                        </td>
+                        <td>
+                            <p:inputText id="especie" value="#{animalView.especie}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td><td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="Rua:" />
+                        </td>
+                        <td>
+                            <p:inputText size="40" value="#{animalView.rua}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="Número:" />
+                        </td>
+                        <td>
+                            <p:inputText size="5" value="#{animalView.numero}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="Bairro:" />
+                        </td>
+                        <td>
+                            <p:inputText id="bairro" value="#{animalView.bairro}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="CEP:" />
+                        </td>
+                        <td>
+                            <p:inputMask id="cep" value="#{animalView.cep}" mask="99.999-999"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:growl id="growl" life="2000" />
+                        </td>
+                        <td>
+                            <p:commandButton value="Cadastrar" actionListener="#{animalView.buttonAction}" id="ajax" update="growl" styleClass="ui-priority-primary" >
+                            <f:ajax execute="@form" render="@none" />
+                            </p:commandButton>
+                        </td>
+                    </tr>
+                </table> 
+            </div>
+        </h:form>
+        <div id="tabela">
+            <h:form id="form_id">
+            <p:dataTable id="tabela_animais" var="animal" value="#{animalView.lista_animais}">
+                <p:column headerText="Nome">
+                    <h:outputText value="#{animal.nome}" />
+                </p:column>
+
+                <p:column headerText="Sexo">
+                    <h:outputText value="#{animal.sexo}" />
+                </p:column>
+
+                <p:column headerText="Raça">
+                    <h:outputText value="#{animal.raca}" />
+                </p:column>
+
+                <p:column headerText="Peso">
+                    <h:outputText value="#{animal.peso}" />
+                </p:column>
+                
+                <p:column headerText="Espécie">
+                    <h:outputText value="#{animal.especie}" />
+                </p:column>
+                </p:dataTable>
+        </h:form>
+        </div>
+    </h:body>
+</html>
+
