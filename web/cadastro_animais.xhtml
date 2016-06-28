@@ -7,10 +7,10 @@
     <h:head>
         <title>Cadastro de animal</title>
         <style>
-            body {background-color:lightgrey;}
-            #tabela {
+            body {background-color:lightgrey;}é
+            #tabela_animais {
                 position: relative;
-                top:  30px;
+                top:  40px;
                 left: 0px;
             }
         </style>
@@ -124,8 +124,8 @@
                 </table> 
             </div>
         </h:form>
-        <div id="tabela">
-            <h:form id="form_id">
+        <div id="tabela_animais">
+            <h:form id="formulario_animais">
             <p:dataTable id="tabela_animais" var="animal" value="#{animalView.lista_animais}">
                 <p:column headerText="Nome">
                     <h:outputText value="#{animal.nome}" />
@@ -145,6 +145,10 @@
                 
                 <p:column headerText="Espécie">
                     <h:outputText value="#{animal.especie}" />
+                </p:column>
+                <p:column width="50">
+                    <p:commandButton update="tabela_animais" actionListener="#{animalView.excluirAnimal(animal)}" icon="ui-icon-trash" title="Delete">
+                </p:commandButton>
                 </p:column>
                 </p:dataTable>
         </h:form>
