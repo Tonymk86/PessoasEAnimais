@@ -15,10 +15,15 @@
                 top:  0px;
                 left: 0px;
             }
+            
+            #tabela_pessoas {
+                position: relative;
+                top:  350px;
+                left: 0px;
+            }
         </style>
     </h:head>
     <h:body>
-        
         <h:form>
             <p:megaMenu orientation="#{megaMenuView.orientation}" style="margin-top:20px">
     <p:submenu label="Cadastro" icon="ui-icon-check">
@@ -116,6 +121,32 @@
             </table> 
         </div>
             </h:form>
+        <div id="tabela_pessoas">
+            <h:form id="formulario_pessoas">
+                <p:dataTable id="tabela_pessoas" var="pessoa" value="#{pessoaView.lista_pessoas}">
+                <p:column headerText="Nome">
+                    <h:outputText value="#{pessoa.nome}" />
+                </p:column>
+
+                <p:column headerText="Sexo">
+                    <h:outputText value="#{pessoa.sexo}" />
+                </p:column>
+
+                <p:column headerText="CPF">
+                    <h:outputText value="#{pessoa.cpf}" />
+                </p:column>
+
+                <p:column headerText="RG">
+                    <h:outputText value="#{pessoa.rg}" />
+                </p:column>
+                    
+                <p:column width="50">
+                    <p:commandButton update="tabela_pessoas" actionListener="#{pessoaView.excluirPessoa(pessoa)}" icon="ui-icon-trash" title="Delete">
+                    </p:commandButton>
+                </p:column>
+                </p:dataTable>
+        </h:form>
+        </div>
     </h:body>
 </html>
 

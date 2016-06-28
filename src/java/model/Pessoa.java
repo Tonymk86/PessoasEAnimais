@@ -30,14 +30,6 @@ public class Pessoa implements Serializable {
     private String rg;
     @ManyToOne
     private Endereco endereco;
-
-    public Pessoa(String nome, boolean sexo, String cpf, String rg, Endereco endereco) {
-        this.nome = nome;
-        this.sexo = sexo;
-        this.cpf = cpf;
-        this.rg = rg;
-        this.endereco = endereco;
-    }
     
     public Long getId() {
         return id;

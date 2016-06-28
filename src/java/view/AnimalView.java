@@ -96,6 +96,12 @@ public class AnimalView {
         System.out.println("Entrou no método buttonAction");
           
     }
+    
+    public void excluirAnimal(Animal animal) {
+    AnimalDao ad=new AnimalDao();
+    ad.excluirAnimal(animal);
+    this.lista_animais.remove(animal);
+    }
 
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);

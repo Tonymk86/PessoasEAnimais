@@ -20,30 +20,42 @@ import model.Endereco;
 import model.Pessoa;
 import model.dao.EnderecoDao;
 import model.dao.PessoaDao;
- 
+
 @ManagedBean
 public class PessoaView {
-     
+
     private String sexo;
     private String nome;
     private String cpf;
     private String rg;
-    
+
     private String rua;
     private int numero;
     private String bairro;
     private String cep;
 
-    
+    private ArrayList lista_pessoas;
+
+    public PessoaView() {
+        PessoaDao ad = new PessoaDao();
+        this.lista_pessoas = ad.consultarPessoas();
+    }
+
     public void imprimir() {
         System.out.println("PessoaView{" + "sexo=" + sexo + ", nome=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", rua=" + rua + ", numero=" + numero + ", bairro=" + bairro + ", cep=" + cep + '}');
     }
-    
+
+    public void excluirPessoa(Pessoa pessoa) {
+        PessoaDao ad = new PessoaDao();
+        ad.excluirPessoa(pessoa);
+        this.lista_pessoas.remove(pessoa);
+    }
+
     public void buttonAction(ActionEvent actionEvent) {
-        String mensagem="Cadastrado com sucesso.";
-        Endereco endereco=new Endereco();
-        
-        boolean s=true;
+        String mensagem = "Cadastrado com sucesso.";
+        Endereco endereco = new Endereco();
+
+        boolean s = true;
 //        if (this.sexo.equals("Masculino")) {
 //            sexo=true;
 //        } else {
@@ -51,48 +63,54 @@ public class PessoaView {
 //        }
 //try {
         //try {
-        Pessoa pessoa=new Pessoa(this.nome, s, this.cpf, rg, endereco);
-        
+        Pessoa pessoa = null;
+
+        pessoa.setCpf(this.cpf);
+        pessoa.setEndereco(endereco);
+        pessoa.setNome(this.nome);
+        pessoa.setRg(rg);
+        pessoa.setSexo(s);
+
         endereco.setBairro(bairro);
         endereco.setCep(cep);
         endereco.setNumero(numero);
         endereco.setRua(rua);
-        
-        EnderecoDao ed=new EnderecoDao();
+
+        EnderecoDao ed = new EnderecoDao();
         ed.inserirEndereco(endereco);
-        
-        System.out.println("CPF: "+this.cpf);
-        
+
+        System.out.println("CPF: " + this.cpf);
+
         pessoa.setCpf(this.cpf);
         pessoa.setNome(nome);
         pessoa.setRg(rg);
         pessoa.setEndereco(endereco);
         pessoa.setSexo(s);
-        
+
         System.out.println(pessoa.toString());
         System.out.println(endereco.toString());
-        PessoaDao pd=new PessoaDao();
+        PessoaDao pd = new PessoaDao();
         pd.inserirPessoa(pessoa);
         //} catch(Exception exc) {
-            //System.out.println(exc.toString());
+        //System.out.println(exc.toString());
         //}
 //        } catch(Exception exc) {
 //        mensagem=exc.toString();
 //        }
         addMessage(mensagem);
-        
+
         System.out.println("Entrou no método buttonAction");
     }
-     
+
     public void addMessage(String summary) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-    
+
     public String getSexo() {
         return sexo;
     }
- 
+
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
@@ -157,5 +175,12 @@ public class PessoaView {
     public String toString() {
         return "PessoaView{" + "sexo=" + sexo + ", nome=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", rua=" + rua + ", numero=" + numero + ", bairro=" + bairro + ", cep=" + cep + '}';
     }
-    
+
+    public ArrayList getLista_pessoas() {
+        return lista_pessoas;
+    }
+
+    public void setLista_pessoas(ArrayList lista_pessoas) {
+        this.lista_pessoas = lista_pessoas;
+    }
 }

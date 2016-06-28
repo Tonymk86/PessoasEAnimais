@@ -44,4 +44,11 @@ Transaction tx=this.session.beginTransaction();
         return results;
 }
 
+public void excluirAnimal(Animal animal) {
+    Transaction tx=this.session.beginTransaction();
+    session.delete(animal);
+    tx.commit();
+    session.close();
+}
+
 }
