@@ -51,10 +51,12 @@ public class PessoaView {
         this.lista_pessoas.remove(pessoa);
     }
 
-    public void buttonAction(ActionEvent actionEvent) {
+    public void cadastrarPessoa() {
         String mensagem = "Cadastrado com sucesso.";
         Endereco endereco = new Endereco();
 
+        System.out.println("cadastrarPessoa()");
+        
         boolean s = true;
 //        if (this.sexo.equals("Masculino")) {
 //            sexo=true;
@@ -63,7 +65,7 @@ public class PessoaView {
 //        }
 //try {
         //try {
-        Pessoa pessoa = null;
+        Pessoa pessoa=new Pessoa();
 
         pessoa.setCpf(this.cpf);
         pessoa.setEndereco(endereco);

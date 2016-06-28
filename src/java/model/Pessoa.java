@@ -30,6 +30,9 @@ public class Pessoa implements Serializable {
     private String rg;
     @ManyToOne
     private Endereco endereco;
+
+    public Pessoa() {
+    }
     
     public Long getId() {
         return id;
